@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -16,8 +18,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.EventListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainWindowController {
     @FXML
@@ -27,23 +32,27 @@ public class MainWindowController {
     @FXML
     private VBox formBox;
     @FXML
-    private HBox fName;
+    private TextField fName;
     @FXML
-    private HBox lName;
+    private TextField lName;
     @FXML
-    private HBox password;
+    private TextField password;
     @FXML
-    private HBox cin;
+    private TextField cin;
     @FXML
-    private HBox dob;
+    private TextField address;
     @FXML
-    private HBox address;
+    private TextField phNumber;
     @FXML
-    private HBox phNumber;
+    private DatePicker sDate;
     @FXML
-    private HBox phNumber;
+    private DatePicker dob;
     @FXML
     private HBox mainWindowId;
+    @FXML
+    private HBox fnameParent;
+    @FXML
+    private HBox lNameBox;
     @FXML
     private AnchorPane sideBar;
     @FXML
@@ -55,8 +64,43 @@ public class MainWindowController {
     private ResultSet result;
 
 
+    public MainWindowController(){
+
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask()
+        {
+            public void run()
+            {
+                fName.setPrefWidth(dob.getPrefWidth());
+                fName.textProperty().addListener((observable, oldValue, newValue) -> {
+                    System.out.println("textfield changed from " + oldValue + " to " + newValue);
+                });
+            }
+
+        };
+        timer.schedule(task,1000l);
+    }
+
+
+
     @FXML
     public void onClick(ActionEvent e){
+        Button btn=new Button("om");
+        btn.prefHeightProperty().bind(lNameBox.heightProperty());
+        btn.setMinWidth(lNameBox.getWidth()/6);
+        btn.setStyle("-fx-background-color:  yellow;" +
+                "    -fx-border-color: grey grey grey transparent;" +
+                "    -fx-border-width: 1px;" +
+                "    -fx-background-radius: 0 10px 10px 0;" +
+                "    -fx-border-radius: 0 10px 10px 0;");
+        lNameBox.getChildren().addAll(btn);
+        lName.setStyle(
+                "    -fx-border-color: grey transparent grey grey;" +
+                "    -fx-border-width: 1px;" +
+                "    -fx-background-radius: 10px 0 0 10px;" +
+                "    -fx-border-radius: 10px 0 0 10px;");
+
+
         sideBar.prefHeightProperty().bind(mainWindowId.heightProperty());
         sideBar.prefWidthProperty().bind(mainWindowId.widthProperty());
         mainContainer.prefHeightProperty().bind(mainWindowId.heightProperty());
@@ -65,11 +109,15 @@ public class MainWindowController {
 //            ((HBox)child).prefHeightProperty().add(formBox.heightProperty());
 //            ((HBox)child).prefWidthProperty().add(formBox.widthProperty());
 //        }
-        System.out.println("omar");
+
     }
+//
+
+
+
+
+
     public void onAddEmployeeBtnClicked(){
-        Date date = new Date();
-        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
         String sql = "INSERT INTO employees "
                 + "(firstName,lastName,address,dateOfBirth,password,phNumber,startDate,cin) "
@@ -78,76 +126,19 @@ public class MainWindowController {
         connect = Connect2DB.connectDb();
 
         try {
-            Alert alert;
-            if (fName.getText().isEmpty()
-                    || lName.getText().isEmpty()
-                    || password.getText().isEmpty()
-                    || cin.getSelectionModel().getSelectedItem() == null
-                    || dob.getText().isEmpty()
-                    || startDat.getSelectionModel().getSelectedItem() == null
-                    || getData.path == null || getData.path == "") {
-                alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Error Message");
-                alert.setHeaderText(null);
-                alert.setContentText("Please fill all blank fields");
-                alert.showAndWait();
-            } else {
-
-                String check = "SELECT employee_id FROM employee WHERE employee_id = '"
-                        + addEmployee_employeeID.getText() + "'";
-
-                statement = connect.createStatement();
-                result = statement.executeQuery(check);
-
-                if (result.next()) {
-                    alert = new Alert(AlertType.ERROR);
-                    alert.setTitle("Error Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Employee ID: " + addEmployee_employeeID.getText() + " was already exist!");
-                    alert.showAndWait();
-                } else {
-
                     prepare = connect.prepareStatement(sql);
-                    prepare.setString(1, addEmployee_employeeID.getText());
-                    prepare.setString(2, addEmployee_firstName.getText());
-                    prepare.setString(3, addEmployee_lastName.getText());
-                    prepare.setString(4, (String) addEmployee_gender.getSelectionModel().getSelectedItem());
-                    prepare.setString(5, addEmployee_phoneNum.getText());
-                    prepare.setString(6, (String) addEmployee_position.getSelectionModel().getSelectedItem());
-
-                    String uri = getData.path;
-                    uri = uri.replace("\\", "\\\\");
-
-                    prepare.setString(7, uri);
-                    prepare.setString(8, String.valueOf(sqlDate));
+                    prepare.setString(1, fName.getText());
+                    prepare.setString(2, lName.getText());
+                    prepare.setString(3, address.getText());
+                    prepare.setString(4, String.valueOf(dob.getValue()));
+                    prepare.setString(5, password.getText());
+                    prepare.setString(6, phNumber.getText());
+                    prepare.setString(7, String.valueOf(sDate.getValue()));
+                    prepare.setString(8, cin.getText());
                     prepare.executeUpdate();
-
-                    String insertInfo = "INSERT INTO employee_info "
-                            + "(employee_id,firstName,lastName,position,salary,date) "
-                            + "VALUES(?,?,?,?,?,?)";
-
-                    prepare = connect.prepareStatement(insertInfo);
-                    prepare.setString(1, addEmployee_employeeID.getText());
-                    prepare.setString(2, addEmployee_firstName.getText());
-                    prepare.setString(3, addEmployee_lastName.getText());
-                    prepare.setString(4, (String) addEmployee_position.getSelectionModel().getSelectedItem());
-                    prepare.setString(5, "0.0");
-                    prepare.setString(6, String.valueOf(sqlDate));
-                    prepare.executeUpdate();
-
-                    alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Information Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Successfully Added!");
-                    alert.showAndWait();
-
-                    addEmployeeShowListData();
-                    addEmployeeReset();
-                }
-            }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 }

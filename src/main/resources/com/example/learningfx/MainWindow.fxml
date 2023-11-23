@@ -23,63 +23,74 @@
             <HBox prefHeight="530.0" prefWidth="591.0">
                <children>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black;" />
-                  <VBox fx:id="formBox" alignment="CENTER" minWidth="-Infinity" prefHeight="530.0" prefWidth="392.0">
+                  <VBox fx:id="formBox" alignment="CENTER" minWidth="-Infinity" prefHeight="530.0" prefWidth="392.0" stylesheets="@formLayout.css">
                      <children>
-                        <HBox fx:id="fName" alignment="CENTER" prefHeight="60.0" prefWidth="392.0" spacing="20.0">
+                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="392.0" spacing="20.0">
                            <children>
                               <Label contentDisplay="CENTER" prefHeight="200.0" prefWidth="196.0" stylesheets="@formLayout.css" text="First Name " textAlignment="CENTER">
                                  <font>
                                     <Font name="Candara Bold" size="19.0" />
                                  </font>
-                              </Label>
-                              <TextField nodeOrientation="LEFT_TO_RIGHT" prefHeight="72.0" prefWidth="278.0" styleClass="text-field" stylesheets="@formLayout.css">
-                                 <font>
-                                    <Font name="Candara Bold" size="19.0" />
-                                 </font>
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
-                                 <cursor>
-                                    <Cursor fx:constant="TEXT" />
-                                 </cursor>
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
-                                 <padding>
-                                    <Insets left="10.0" />
-                                 </padding>
-                              </TextField>
+                              </Label>
+                              <HBox fx:id="fnameParent" prefWidth="278.0">
+                                 <children>
+                                    <TextField fx:id="fName" nodeOrientation="LEFT_TO_RIGHT" prefHeight="72.0" prefWidth="278.0" styleClass="text-field" stylesheets="@formLayout.css">
+                                       <font>
+                                          <Font name="Candara Bold" size="19.0" />
+                                       </font>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <cursor>
+                                          <Cursor fx:constant="TEXT" />
+                                       </cursor>
+                                       <padding>
+                                          <Insets left="10.0" />
+                                       </padding>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
                            </children>
                            <VBox.margin>
                               <Insets bottom="4.0" top="4.0" />
                            </VBox.margin></HBox>
-                        <HBox fx:id="lName" alignment="CENTER" prefHeight="60.0" prefWidth="392.0" spacing="20.0">
+                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="392.0" spacing="20.0">
                            <children>
                               <Label prefHeight="200.0" prefWidth="196.0" stylesheets="@formLayout.css" text="Last Name">
                                  <font>
                                     <Font name="Candara Bold" size="19.0" />
                                  </font>
                               </Label>
-                              <TextField prefHeight="72.0" prefWidth="278.0" styleClass="text-field" stylesheets="@formLayout.css">
-                                 <font>
-                                    <Font name="Candara Bold" size="19.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets left="10.0" />
-                                 </padding>
-                              </TextField>
+                              <HBox fx:id="lNameBox" prefWidth="278.0">
+                                 <children>
+                                    <TextField fx:id="lName" prefHeight="72.0" prefWidth="278.0" styleClass="text-field" stylesheets="@formLayout.css">
+                                       <font>
+                                          <Font name="Candara Bold" size="19.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets left="10.0" />
+                                       </padding>
+                                    </TextField>
+                                 </children>
+                              </HBox>
                            </children>
                            <VBox.margin>
                               <Insets bottom="4.0" top="4.0" />
                            </VBox.margin></HBox>
-                        <HBox fx:id="cin" alignment="CENTER" prefHeight="60.0" prefWidth="392.0" spacing="20.0">
+                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="392.0" spacing="20.0">
                            <children>
                               <Label prefHeight="200.0" prefWidth="196.0" stylesheets="@formLayout.css" text="Password">
                                  <font>
                                     <Font name="Candara Bold" size="19.0" />
                                  </font>
                               </Label>
-                              <TextField prefHeight="72.0" prefWidth="278.0" styleClass="text-field" stylesheets="@formLayout.css">
+                              <TextField fx:id="password" prefHeight="72.0" prefWidth="278.0" styleClass="text-field" stylesheets="@formLayout.css">
                                  <font>
                                     <Font name="Candara Bold" size="19.0" />
                                  </font>
@@ -91,14 +102,14 @@
                            <VBox.margin>
                               <Insets bottom="4.0" top="4.0" />
                            </VBox.margin></HBox>
-                        <HBox fx:id="password" alignment="CENTER" prefHeight="60.0" prefWidth="392.0" spacing="20.0">
+                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="392.0" spacing="20.0">
                            <children>
                               <Label prefHeight="200.0" prefWidth="196.0" stylesheets="@formLayout.css" text="Cin">
                                  <font>
                                     <Font name="Candara Bold" size="19.0" />
                                  </font>
                               </Label>
-                              <TextField prefHeight="72.0" prefWidth="278.0" styleClass="text-field" stylesheets="@formLayout.css">
+                              <TextField fx:id="cin" prefHeight="72.0" prefWidth="278.0" styleClass="text-field" stylesheets="@formLayout.css">
                                  <font>
                                     <Font name="Candara Bold" size="19.0" />
                                  </font>
@@ -110,14 +121,14 @@
                            <VBox.margin>
                               <Insets bottom="4.0" top="4.0" />
                            </VBox.margin></HBox>
-                        <HBox fx:id="address" alignment="CENTER" prefHeight="60.0" prefWidth="392.0" spacing="20.0">
+                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="392.0" spacing="20.0">
                            <children>
                               <Label prefHeight="200.0" prefWidth="196.0" stylesheets="@formLayout.css" text="Phone Number">
                                  <font>
                                     <Font name="Candara Bold" size="19.0" />
                                  </font>
                               </Label>
-                              <TextField prefHeight="72.0" prefWidth="278.0" styleClass="text-field" stylesheets="@formLayout.css">
+                              <TextField fx:id="phNumber" prefHeight="72.0" prefWidth="278.0" styleClass="text-field" stylesheets="@formLayout.css">
                                  <font>
                                     <Font name="Candara Bold" size="19.0" />
                                  </font>
@@ -129,33 +140,50 @@
                            <VBox.margin>
                               <Insets bottom="4.0" top="4.0" />
                            </VBox.margin></HBox>
-                        <HBox fx:id="dob" alignment="CENTER" minWidth="-Infinity" prefHeight="60.0" spacing="20.0">
+                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="392.0" spacing="20.0">
+                           <children>
+                              <Label prefHeight="200.0" prefWidth="196.0" stylesheets="@formLayout.css" text="address">
+                                 <font>
+                                    <Font name="Candara Bold" size="19.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="address" prefHeight="72.0" prefWidth="278.0" styleClass="text-field" stylesheets="@formLayout.css">
+                                 <font>
+                                    <Font name="Candara Bold" size="19.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" minWidth="-Infinity" prefHeight="60.0" spacing="20.0">
                            <children>
                               <Label prefHeight="108.0" prefWidth="145.0" stylesheets="@formLayout.css" text="Date of Birth">
                                  <font>
                                     <Font name="Candara Bold" size="19.0" />
                                  </font>
                               </Label>
-                              <DatePicker fx:id="datePick1" prefHeight="83.0" prefWidth="228.0" showWeekNumbers="true" />
+                              <DatePicker fx:id="dob" prefHeight="83.0" prefWidth="228.0" showWeekNumbers="true" />
                            </children>
                            <VBox.margin>
                               <Insets bottom="4.0" top="4.0" />
                            </VBox.margin></HBox>
-                        <HBox fx:id="phNumber" alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0">
+                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="20.0">
                            <children>
                               <Label prefHeight="200.0" prefWidth="142.0" stylesheets="@formLayout.css" text="Date of Start">
                                  <font>
                                     <Font name="Candara Bold" size="19.0" />
                                  </font>
                               </Label>
-                              <DatePicker fx:id="datePick2" prefHeight="83.0" prefWidth="226.0" />
+                              <DatePicker fx:id="sDate" prefHeight="83.0" prefWidth="226.0" />
                            </children>
                            <VBox.margin>
                               <Insets bottom="4.0" top="4.0" />
                            </VBox.margin></HBox>
                         <HBox alignment="CENTER" prefHeight="177.0" prefWidth="392.0" spacing="40.0">
                            <children>
-                              <Button fx:id="addEmployeeBtn" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Add" textAlignment="CENTER" />
+                              <Button fx:id="addEmployeeBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onAddEmployeeBtnClicked" prefHeight="30.0" prefWidth="80.0" text="Add" textAlignment="CENTER" />
                               <Button alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Clear" textAlignment="CENTER" />
                               <Button alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Cancel" textAlignment="CENTER" />
                            </children>
