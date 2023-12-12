@@ -1,5 +1,4 @@
 package com.example.learningfx;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

@@ -81,14 +81,12 @@ public class MainWindowController {
         timer.schedule(task,1000l);
     }
 
-
-
     @FXML
     public void onClick(ActionEvent e){
         Button btn=new Button("om");
         btn.prefHeightProperty().bind(lNameBox.heightProperty());
         btn.setMinWidth(lNameBox.getWidth()/6);
-        btn.setStyle("-fx-background-color:  yellow;" +
+        btn.setStyle("-fx-background-color:  red;" +//#deddd9;" +
                 "    -fx-border-color: grey grey grey transparent;" +
                 "    -fx-border-width: 1px;" +
                 "    -fx-background-radius: 0 10px 10px 0;" +
@@ -98,13 +96,14 @@ public class MainWindowController {
                 "    -fx-border-color: grey transparent grey grey;" +
                 "    -fx-border-width: 1px;" +
                 "    -fx-background-radius: 10px 0 0 10px;" +
-                "    -fx-border-radius: 10px 0 0 10px;");
+                "    -fx-border-radius: 10px 0 0 10px;"
+                );
 
 
-        sideBar.prefHeightProperty().bind(mainWindowId.heightProperty());
-        sideBar.prefWidthProperty().bind(mainWindowId.widthProperty());
-        mainContainer.prefHeightProperty().bind(mainWindowId.heightProperty());
-        mainContainer.prefWidthProperty().bind(mainWindowId.widthProperty());
+//        sideBar.prefHeightProperty().bind(mainWindowId.heightProperty());
+//        sideBar.prefWidthProperty().bind(mainWindowId.widthProperty());
+//        mainContainer.prefHeightProperty().bind(mainWindowId.heightProperty());
+//        mainContainer.prefWidthProperty().bind(mainWindowId.widthProperty());
 //        for(Node child : formBox.getChildren()) {
 //            ((HBox)child).prefHeightProperty().add(formBox.heightProperty());
 //            ((HBox)child).prefWidthProperty().add(formBox.widthProperty());
